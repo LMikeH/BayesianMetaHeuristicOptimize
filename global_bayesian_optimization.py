@@ -2,15 +2,14 @@
 import numpy as np
 from noisy_benchmarks.rastrigin_generator import rastrigin as ras
 from optimizer.ETA import ETA
-from metamodel_tests.gpc_model import gpc_metamodel
-from metamodel_tests.neural_nets import nn_ensemble
+
 # from metamodel_tests.mcdropout_model import Learner, dropout_net
-from metamodel_tests.sparse_gpr_model import sgpr_model
+
 import torch
 import torch.nn as nn
-from metamodel_tests.gpy_sgpr import SPGRModel
 
-from metamodel.bohamian_model import BayesianNN
+
+from metamodels.bohamian_model import BayesianNN
 
 class GBOptimizer(object):
     def __init__(self,
@@ -85,6 +84,7 @@ if __name__ == '__main__':
         # ensemble = nn_ensemble(dim, 20, 20, 30, 30, 80)
         # solver.model = ensemble
         solver.train_model()
+        solver.model.trained = True
         solver.run_eta()
         converged = solver.optimizer.convergence_check(1.0, 2.0)
         print(len(solver.xdata_set))
